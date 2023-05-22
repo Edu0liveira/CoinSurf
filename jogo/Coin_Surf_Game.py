@@ -2,7 +2,7 @@
 # ===== Inicialização =====
 # ----- Importa e inicia pacotes
 import pygame
-from config_coin_surf import WIDTH, HEIGHT, INIT, GAME, QUIT
+from jogo.config_coin_surf import WIDTH, HEIGHT, INIT, GAME, QUIT
 from init_screen_coin_surf import init_screen
 from game_screen_coin_surf import game_screen
 

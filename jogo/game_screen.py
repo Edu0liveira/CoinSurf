@@ -16,6 +16,7 @@ def game_screen(window):
     all_moedas_amarelas  = pygame.sprite.Group()
     all_moedas_verdes  = pygame.sprite.Group()
     all_moedas_vermelhas  = pygame.sprite.Group()
+
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_sharpedo'] = all_sharpedo
@@ -37,21 +38,10 @@ def game_screen(window):
         all_sprites.add(sharpedo)
         all_sharpedo.add(sharpedo)
     # Criando as moedas amarelas
-    for i in range(4):
+    for i in range(6):
         moeda_amarela = Moeda_amarela(assets)
         all_sprites.add(moeda_amarela)
         all_moedas_amarelas.add(moeda_amarela)
-    '''# Criando as moedas verdes
-    for i in range(1):
-        moeda_verde = Moeda_verde(assets)
-        all_sprites.add(moeda_verde)
-        all_moedas_verdes.add(moeda_verde)'''
-
-    '''# Criando as moedas vermelhas
-    for i in range(1):
-        moeda_vermelha = Moeda_vermelha(assets)
-        all_sprites.add(moeda_vermelha)
-        all_moedas_vermelhas.add(moeda_vermelha)'''
 
     DONE = 0
     PLAYING = 1
@@ -61,12 +51,13 @@ def game_screen(window):
     keys_down = {}
     score = 0
     lives = 3
-
+    
+    green_coin_timer = pygame.USEREVENT + 1
+    pygame.time.set_timer(green_coin_timer, 10000)
 
     # ===== Loop principal =====
     while state != DONE:
         clock.tick(FPS)
-
         # ----- Trata eventos
         for event in pygame.event.get():
 
@@ -80,19 +71,19 @@ def game_screen(window):
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
                     if event.key == pygame.K_UP:
-                        player.speedy -= 8
+                        player.speedy -= 5
                     if event.key == pygame.K_DOWN:
-                        player.speedy += 8
+                        player.speedy += 5
 
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:
                     # Dependendo da tecla, altera a velocidade.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_UP:
-                            player.speedy += 8
+                            player.speedy += 5
                         if event.key == pygame.K_DOWN:
-                            player.speedy -= 8
-
+                            player.speedy -= 5
+ 
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos Sharpedos e moedas
         all_sprites.update()

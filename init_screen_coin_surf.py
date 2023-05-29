@@ -2,6 +2,10 @@ import pygame
 from os import path
 from config_coin_surf import WIDTH, HEIGHT
 import config_coin_surf
+pygame.mixer.init()
+musica=pygame.mixer.music.load('musica_padrao.mp3')
+pygame.mixer.music.set_volume(.6)
+pygame.mixer.music.play()
 
 def init_screen(screen):
     # Variável para o ajuste de velocidade

@@ -13,7 +13,7 @@ pygame.display.init()
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('pikachu_coin_surf.png')
+pygame.display.set_caption('COIN SURF')
 
 state = INIT
 while state != QUIT:

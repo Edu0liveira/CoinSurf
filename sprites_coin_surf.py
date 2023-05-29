@@ -74,9 +74,9 @@ class Sharpedo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = WIDTH
         self.rect.y = random.randint(HEIGHT // 2, HEIGHT - SHARPEDO_HEIGHT)
-        self.speedx = -6
+        self.speedx = -7
         self.speedy = 0
-        self.amplitude = 50  # Amplitude do movimento senoidal
+        self.amplitude = 70  # Amplitude do movimento senoidal
         self.frequency = 0.1  # Frequência do movimento senoidal
         self.initial_y = self.rect.y  # Posição inicial em y
 
@@ -94,7 +94,7 @@ class Sharpedo(pygame.sprite.Sprite):
         if self.rect.right < 0:
             self.rect.x = WIDTH
             self.rect.y = random.randint(HEIGHT // 2, HEIGHT - SHARPEDO_HEIGHT)
-            self.speedx = -6
+            self.speedx = -7
             self.speedy = 0
 
 class Sharpedo_boost(pygame.sprite.Sprite):

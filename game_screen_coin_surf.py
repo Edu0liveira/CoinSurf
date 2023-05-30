@@ -55,6 +55,8 @@ def game_screen(window):
     green_coin_timer = pygame.USEREVENT + 1
     pygame.time.set_timer(green_coin_timer, 10000)
 
+    quantidade_de_moedas = 0
+
     # ===== Loop principal =====
     while state != DONE:
         clock.tick(FPS)
@@ -100,6 +102,9 @@ def game_screen(window):
 
                 # Ganhou pontos!
                 score += 1
+                quantidade_de_moedas += 1
+                if quantidade_de_moedas % 50 == 0:
+                    lives += 1
 
             hits = pygame.sprite.spritecollide(player, all_moedas_verdes, True, pygame.sprite.collide_mask)
             for v in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala

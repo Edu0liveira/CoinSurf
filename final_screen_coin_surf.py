@@ -8,7 +8,7 @@ import assets_coin_surf
 
 
 
-def final_screen(screen):
+def final_screen(screen, score_obj):
 
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -46,10 +46,10 @@ def final_screen(screen):
         text_rect.midtop = (WIDTH / 2,  10)
         screen.blit(text_surface, text_rect)
 
-        '''text_surface = assets_coin_surf.assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
+        text_surface = assets_coin_surf.assets[SCORE_FONT].render("{:04d}".format(score_obj.points), True, YELLOW)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (WIDTH / 2,  180)
-        screen.blit(text_surface, text_rect)'''
+        screen.blit(text_surface, text_rect)
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()

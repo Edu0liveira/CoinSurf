@@ -7,7 +7,7 @@ from sprites_coin_surf import Surfista, Sharpedo, Moeda_amarela
 score2 = 0 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-def game_screen(window):
+def game_screen(window, score_obj):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
     assets = load_assets()
@@ -115,6 +115,7 @@ def game_screen(window):
         elif state == CAIU:
                 if lives == 0:
                     state = config_coin_surf.FINAL
+                    score_obj.points = score
                     break
                 else:
                     state = PLAYING

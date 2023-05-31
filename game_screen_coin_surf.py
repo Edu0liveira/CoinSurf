@@ -1,9 +1,11 @@
 import pygame
 from config_coin_surf import FPS, WIDTH, HEIGHT, BLACK, YELLOW
+import config_coin_surf
 from assets_coin_surf import load_assets, BACKGROUND, SCORE_FONT
-from sprites_coin_surf import Pikachu, Sharpedo, Moeda_amarela, Moeda_verde, Moeda_vermelha
+from sprites_coin_surf import Surfista, Sharpedo, Moeda_amarela
 
 score2 = 0 
+window = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
@@ -30,7 +32,7 @@ def game_screen(window):
     background_rect = background.get_rect()
 
     # Criando o Surfista
-    player = Pikachu(groups, assets)
+    player = Surfista(groups, assets)
     all_sprites.add(player)
     # Criando os Sharpedos
     for i in range(1):
@@ -43,7 +45,6 @@ def game_screen(window):
         all_sprites.add(moeda_amarela)
         all_moedas_amarelas.add(moeda_amarela)
 
-    DONE = 0
     PLAYING = 1
     CAIU = 2
     state = PLAYING
@@ -51,21 +52,16 @@ def game_screen(window):
     keys_down = {}
     score = 0
     lives = 3
-    
-    green_coin_timer = pygame.USEREVENT + 1
-    pygame.time.set_timer(green_coin_timer, 10000)
-
-    quantidade_de_moedas = 0
 
     # ===== Loop principal =====
-    while state != DONE:
+    while state != config_coin_surf.FINAL:
         clock.tick(FPS)
         # ----- Trata eventos
         for event in pygame.event.get():
 
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                state = DONE
+                state = config_coin_surf.FINAL
             # Só verifica o teclado se está no estado de jogo
             if state == PLAYING:
                 # Verifica se apertou alguma tecla.
@@ -91,46 +87,19 @@ def game_screen(window):
         all_sprites.update()
 
         if state == PLAYING:
-            # Verifica se houve colisão entre a moeda amarela e o Pikachu 
+            # Verifica se houve colisão entre a moeda amarela e o Surfista
             hits = pygame.sprite.spritecollide(player, all_moedas_amarelas, True, pygame.sprite.collide_mask)
-            for m in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
-                #assets[DESTROY_SOUND].play() DESCOMENTA DEPOIS
+            for m in hits: 
                 m = Moeda_amarela(assets)
                 all_sprites.add(m)
                 all_moedas_amarelas.add(m)
 
                 # Ganhou pontos!
                 score += 1
-                quantidade_de_moedas += 1
-                if quantidade_de_moedas % 50 == 0:
+                if score % 50 == 0 and lives < 3:
                     lives += 1
-
-            hits = pygame.sprite.spritecollide(player, all_moedas_verdes, True, pygame.sprite.collide_mask)
-            for v in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
-                #assets[DESTROY_SOUND].play() DESCOMENTA DEPOIS
-                v = Moeda_verde(assets)
-                all_sprites.add(v)
-                all_moedas_verdes.add(v)
-
-                # Você ganhou uma vida!
-                lives += 1
-
-            hits = pygame.sprite.spritecollide(player, all_moedas_vermelhas, True, pygame.sprite.collide_mask)
-            for vm in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
-                #assets[DESTROY_SOUND].play() DESCOMENTA DEPOIS
-                vm = Moeda_vermelha(assets)
-                all_sprites.add(vm)
-                all_moedas_vermelhas.add(vm)
-
-                # A pontuação e a velocidade dobram!
-                
-
-                    
-
-            # Verifica se houve colisão entre o Pikachu e o Sharpedo
+             
+            # Verifica se houve colisão entre o Surfista e o Sharpedo
             hits = pygame.sprite.spritecollide(player, all_sharpedo, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 player.kill()
@@ -145,10 +114,11 @@ def game_screen(window):
 
         elif state == CAIU:
                 if lives == 0:
-                    state = DONE
+                    state = config_coin_surf.FINAL
+                    break
                 else:
                     state = PLAYING
-                    player = Pikachu(groups, assets)
+                    player = Surfista(groups, assets)
                     all_sprites.add(player)
 
         # ----- Gera saídas
@@ -183,3 +153,5 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
 
         pygame.display.update()  # Mostra o novo frame para o jogador
+
+    return state

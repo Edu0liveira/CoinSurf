@@ -2,10 +2,13 @@ import pygame
 from os import path
 from config_coin_surf import WIDTH, HEIGHT
 import config_coin_surf
+
+# Colocando uma música de fundo para o jogo
 pygame.mixer.init()
-musica=pygame.mixer.music.load('assets_coin_surf/snd/musica_padrao.mp3')
+musica = pygame.mixer.music.load('assets_coin_surf/snd/musica_padrao.mp3')
 pygame.mixer.music.set_volume(.6)
-pygame.mixer.music.play()
+pygame.mixer.music.play(-1)
+
 
 def init_screen(screen):
     # Variável para o ajuste de velocidade
@@ -30,7 +33,7 @@ def init_screen(screen):
                 running = False
 
             if event.type == pygame.KEYUP:
-                state = config_coin_surf.INIT2
+                state = config_coin_surf.MANUAL
                 running = False
 
         # A cada loop, redesenha o fundo e os sprites

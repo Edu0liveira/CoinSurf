@@ -1,6 +1,6 @@
 import pygame
 import os
-from config_coin_surf import SHARPEDO_WIDTH, SHARPEDO_HEIGHT, PIKACHU_WIDTH, PIKACHU_HEIGHT, MOEDA_AMARELA_WIDTH, MOEDA_VERDE_WIDTH, MOEDA_VERMELHA_WIDTH, MOEDA_AMARELA_HEIGHT, MOEDA_VERDE_HEIGHT, MOEDA_VERMELHA_HEIGHT, IMG_DIR, WIDTH, HEIGHT, FNT_DIR, SHARPEDO_BOOST_WIDTH, SHARPEDO_BOOST_HEIGHT, PIKACHU_BOOST_WIDTH, PIKACHU_BOOST_HEIGHT, SURFISTA_HEIGHT, SURFISTA_WIDTH, SURFISTA_UP_HEIGHT,SURFISTA_UP_WIDTH, SURFISTA_DOWN_HEIGHT,SURFISTA_DOWN_WIDTH, ONDA_HEIGHT, ONDA_WIDTH
+from config_coin_surf import SHARPEDO_WIDTH, SHARPEDO_HEIGHT, PIKACHU_WIDTH, PIKACHU_HEIGHT, MOEDA_AMARELA_WIDTH, MOEDA_VERDE_WIDTH, MOEDA_VERMELHA_WIDTH, MOEDA_AMARELA_HEIGHT, MOEDA_VERDE_HEIGHT, MOEDA_VERMELHA_HEIGHT, IMG_DIR, WIDTH, HEIGHT, FNT_DIR, SHARPEDO_BOOST_WIDTH, SHARPEDO_BOOST_HEIGHT, PIKACHU_BOOST_WIDTH, PIKACHU_BOOST_HEIGHT, SURFISTA_HEIGHT, SURFISTA_WIDTH, SURFISTA_UP_HEIGHT,SURFISTA_UP_WIDTH, SURFISTA_DOWN_HEIGHT,SURFISTA_DOWN_WIDTH, ONDA_HEIGHT, ONDA_WIDTH, MOEDA_NOVA_HEIGHT, MOEDA_NOVA_WIDHT
 
 BACKGROUND = 'onda_coin_surf.jpg'
 BACKGROUND2 = 'onda_tarde_coin_surf'
@@ -17,10 +17,20 @@ SURFISTA_IMG = 'surfista1'
 SURFISTA_UP_IMG = 'surfista2'
 SURFISTA_DOWN_IMG = 'surfista3'
 ONDA_IMG = 'onda_jog'
+MOEDA_AMARELA_FRAMES = 'moeda_amarela_frames'
 
 pygame.display.init()
 pygame.font.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
+
+
+f1 = pygame.image.load(os.path.join(IMG_DIR, 'moeda1.png')).convert_alpha()
+f2 = pygame.image.load(os.path.join(IMG_DIR, 'moeda2.png')).convert_alpha()
+f3 = pygame.image.load(os.path.join(IMG_DIR, 'moeda3.png')).convert_alpha()
+f4 = pygame.image.load(os.path.join(IMG_DIR, 'moeda4.png')).convert_alpha()
+f5 = pygame.image.load(os.path.join(IMG_DIR, 'moeda5.png')).convert_alpha()
+f6 = pygame.image.load(os.path.join(IMG_DIR, 'moeda6.png')).convert_alpha()
+
 
 def load_assets():
     assets = {}
@@ -55,9 +65,14 @@ def load_assets():
     assets[PIKACHU_IMG] = pygame.transform.scale(assets[PIKACHU_IMG], (PIKACHU_WIDTH, PIKACHU_HEIGHT))
     assets[PIKACHU_BOOST_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'pikachu_boost_coin_surf.png')).convert_alpha()
     assets[PIKACHU_BOOST_IMG] = pygame.transform.scale(assets[PIKACHU_IMG], (PIKACHU_BOOST_WIDTH, PIKACHU_BOOST_HEIGHT))
-    
-    assets[MOEDA_AMARELA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'moeda_amarela_coin_surf.png')).convert_alpha()
+
+
+    assets[MOEDA_AMARELA_FRAMES] = [f1,f2,f3,f4,f5,f6]
+    assets[MOEDA_AMARELA_FRAMES] = [pygame.transform.scale(image, (MOEDA_NOVA_WIDHT, MOEDA_NOVA_HEIGHT)) for image in assets[MOEDA_AMARELA_FRAMES]]
+    assets[MOEDA_AMARELA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'moeda_amarela.png')).convert_alpha()
     assets[MOEDA_AMARELA_IMG] = pygame.transform.scale(assets[MOEDA_AMARELA_IMG], (MOEDA_AMARELA_WIDTH, MOEDA_AMARELA_HEIGHT))
+
+
     assets[MOEDA_VERDE_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'moeda_verde_coin_surf.png')).convert_alpha()
     assets[MOEDA_VERDE_IMG] = pygame.transform.scale(assets[MOEDA_VERDE_IMG], (MOEDA_VERDE_WIDTH, MOEDA_VERDE_HEIGHT))
     assets[MOEDA_VERMELHA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'moeda_vermelha_coin_surf.png')).convert_alpha()

@@ -40,6 +40,10 @@ MOEDA_VERDE_HEIGHT = 50
 MOEDA_VERMELHA_WIDTH = 50
 MOEDA_VERMELHA_HEIGHT = 50
 
+
+MOEDA_NOVA_HEIGHT = 30
+MOEDA_NOVA_WIDHT = 30
+
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

@@ -1,8 +1,8 @@
 import random
 import pygame
 import math 
-from config_coin_surf import SHARPEDO_WIDTH, SHARPEDO_HEIGHT, MOEDA_AMARELA_WIDTH, MOEDA_VERDE_WIDTH, MOEDA_VERMELHA_WIDTH, MOEDA_AMARELA_HEIGHT, MOEDA_VERDE_HEIGHT, MOEDA_VERMELHA_HEIGHT, IMG_DIR, WIDTH, HEIGHT, SURFISTA_HEIGHT,  SURFISTA_WIDTH, SURFISTA_UP_WIDTH, SURFISTA_UP_HEIGHT, SURFISTA_DOWN_WIDTH, SURFISTA_DOWN_HEIGHT
-from assets_coin_surf import PIKACHU_IMG, PIKACHU_BOOST_IMG, SHARPEDO_IMG, SHARPEDO_BOOST_IMG, MOEDA_AMARELA_IMG, MOEDA_VERDE_IMG, MOEDA_VERMELHA_IMG, SURFISTA_IMG, SURFISTA_UP_IMG, SURFISTA_DOWN_IMG, load_assets
+from config_coin_surf import SHARPEDO_WIDTH, SHARPEDO_HEIGHT, MOEDA_AMARELA_WIDTH, MOEDA_VERDE_WIDTH, MOEDA_VERMELHA_WIDTH, MOEDA_AMARELA_HEIGHT, MOEDA_VERDE_HEIGHT, MOEDA_VERMELHA_HEIGHT, IMG_DIR, WIDTH, HEIGHT, SURFISTA_HEIGHT,  SURFISTA_WIDTH, SURFISTA_UP_WIDTH, SURFISTA_UP_HEIGHT, SURFISTA_DOWN_WIDTH, SURFISTA_DOWN_HEIGHT, MOEDA_NOVA_HEIGHT, MOEDA_NOVA_WIDHT
+from assets_coin_surf import PIKACHU_IMG, PIKACHU_BOOST_IMG, SHARPEDO_IMG, SHARPEDO_BOOST_IMG, MOEDA_AMARELA_IMG, MOEDA_VERDE_IMG, MOEDA_VERMELHA_IMG, SURFISTA_IMG, SURFISTA_UP_IMG, SURFISTA_DOWN_IMG, MOEDA_AMARELA_FRAMES, load_assets
 
 assets = load_assets()
 
@@ -128,27 +128,38 @@ class Moeda_amarela(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[MOEDA_AMARELA_IMG]
+        self.assets = assets
+        self.frame_index = 0  # Index of the current frame
+        self.animation_speed = 100  # Speed of the animation (lower is faster)
+        self.image = self.assets[MOEDA_AMARELA_FRAMES][self.frame_index]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = WIDTH
-        self.rect.y = random.randint((HEIGHT/2), HEIGHT- MOEDA_AMARELA_HEIGHT)
+        self.rect.y = random.randint(HEIGHT // 2, HEIGHT - MOEDA_AMARELA_HEIGHT)
         self.speedx = -5
         self.speedy = 0
 
     def update(self):
         # Atualizando a posição da moeda amarela
-        self.image = assets[MOEDA_AMARELA_IMG]
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # Se  a moeda amarela passar do final da tela, volta para cima e sorteia
+
+        # Animate the coin by changing the frame
+        self.frame_index += 1
+        if self.frame_index >= len(self.assets[MOEDA_AMARELA_FRAMES]):
+            self.frame_index = 0
+
+        # Set the current frame image
+        self.image = self.assets[MOEDA_AMARELA_FRAMES][self.frame_index]
+
+        # Se a moeda amarela passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.image = assets[MOEDA_AMARELA_IMG]
             self.rect.x = WIDTH
-            self.rect.y = random.randint((HEIGHT/2), HEIGHT- MOEDA_AMARELA_HEIGHT)
+            self.rect.y = random.randint(HEIGHT // 2, HEIGHT - MOEDA_AMARELA_HEIGHT)
             self.speedx = -5
             self.speedy = 0
+
 
 class Moeda_verde(pygame.sprite.Sprite):
     def __init__(self, assets):

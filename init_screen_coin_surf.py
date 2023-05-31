@@ -3,8 +3,8 @@ from os import path
 from config_coin_surf import WIDTH, HEIGHT
 import config_coin_surf
 pygame.mixer.init()
-musica=pygame.mixer.music.load('assets_coin_surf/snd/musica_padrao.mp3')
-pygame.mixer.music.set_volume(.6)
+musica=pygame.mixer.music.load('assets_coin_surf/snd/matheus.mp3')
+pygame.mixer.music.set_volume(.9)
 pygame.mixer.music.play()
 
 def init_screen(screen):

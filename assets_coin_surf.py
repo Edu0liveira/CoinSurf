@@ -12,19 +12,12 @@ SCORE_FONT = 'score_font'
 SURFISTA_IMG = 'surfista1'
 SURFISTA_UP_IMG = 'surfista2'
 SURFISTA_DOWN_IMG = 'surfista3'
-MOEDA_AMARELA_FRAMES = 'moeda_amarela_frames'
 
 pygame.display.init()
 pygame.font.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-f1 = pygame.image.load(os.path.join(IMG_DIR, 'moeda1.png')).convert_alpha()
-f2 = pygame.image.load(os.path.join(IMG_DIR, 'moeda2.png')).convert_alpha()
-f3 = pygame.image.load(os.path.join(IMG_DIR, 'moeda3.png')).convert_alpha()
-f4 = pygame.image.load(os.path.join(IMG_DIR, 'moeda4.png')).convert_alpha()
-f5 = pygame.image.load(os.path.join(IMG_DIR, 'moeda5.png')).convert_alpha()
-f6 = pygame.image.load(os.path.join(IMG_DIR, 'moeda6.png')).convert_alpha()
 
 def load_assets():
     assets = {}
@@ -49,10 +42,6 @@ def load_assets():
     assets[SHARPEDO_IMG] = pygame.transform.scale(assets[SHARPEDO_IMG], (SHARPEDO_WIDTH, SHARPEDO_HEIGHT))
     assets[SHARPEDO_BOOST_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'sharpedo_boost_coin_surf.png')).convert_alpha()
     assets[SHARPEDO_BOOST_IMG] = pygame.transform.scale(assets[SHARPEDO_IMG], (SHARPEDO_BOOST_WIDTH, SHARPEDO_BOOST_HEIGHT))
-
-    assets[MOEDA_AMARELA_FRAMES] = [f1, f2, f3, f4, f5, f6]
-    assets[MOEDA_AMARELA_FRAMES] = [pygame.transform.scale(image, (MOEDA_NOVA_WIDTH, MOEDA_NOVA_HEIGHT)) for image in assets[MOEDA_AMARELA_FRAMES]]
-
        
     assets[MOEDA_AMARELA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'moeda_amarela_coin_surf.png')).convert_alpha()
     assets[MOEDA_AMARELA_IMG] = pygame.transform.scale(assets[MOEDA_AMARELA_IMG], (MOEDA_AMARELA_WIDTH, MOEDA_AMARELA_HEIGHT))

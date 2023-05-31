@@ -100,7 +100,7 @@ class Sharpedo_boost(pygame.sprite.Sprite):
 
 class Moeda_amarela(pygame.sprite.Sprite):
     def __init__(self, assets):
-        # Construtor da classe mãe (Sprite).
+         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[MOEDA_AMARELA_IMG]
